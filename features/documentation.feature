@@ -9,7 +9,7 @@ I can doing smth
 
 
   Scenario: Create repository
-    Given user navigates to "Create a new repository" page
+    Given user choose menu "New repository"
 	When user create new repository
 	Then repository will be create
 

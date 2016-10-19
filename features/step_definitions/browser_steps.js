@@ -1,10 +1,10 @@
-var LoginPage = require('./loginPage');
+var LoginPage = require('./pages/loginPage');
 var loginPage = new LoginPage();
 
-var HomePage = require('./homePage');
+var HomePage = require('./pages/homePage');
 var homePage = new HomePage();
 
-var HomePageLogIn = require('./homePageLogIn');
+var HomePageLogIn = require('./pages/homePageLogIn');
 var homePageLogIn = new HomePageLogIn();
 
 
@@ -24,8 +24,8 @@ var steps = function() {
     return browser.findElement(by.css('h2.shelf-title')).isDisplayed();
   });
 
-  this.Given(/^user navigates to "([^"]*)" page$/, function(arg) {
-    return homePageLogIn.clickPlusButton();
+  this.Given(/^user choose menu "([^"]*)"$/, function(arg) {
+    return homePageLogIn.chooseMenuItem();
   });
 
   this.When(/^user create new repository$/, function() {
