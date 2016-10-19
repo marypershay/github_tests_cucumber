@@ -1,56 +1,40 @@
-//var seleniumWebdriver = require('selenium-webdriver');
+var LoginPage = require('./loginPage');
+var loginPage = new LoginPage();
 
-module.exports = function () {
+var HomePage = require('./homePage');
+var homePage = new HomePage();
 
-  this.Given(/^user navigates to GitHub\.com$/, function () {
-    return browser.get('https://github.com/');
+var HomePageLogIn = require('./homePageLogIn');
+var homePageLogIn = new HomePageLogIn();
+
+
+var steps = function() {
+
+  this.Given(/^user navigates to "(.+)"$/, function(url) {
+    return browser.get(url);
+  });
+  this.When(/^user logs in using Username as "([^"]*)" and Password "([^"]*)"$/, function(login, password) {
+    return homePage.clickSignInButton()
+      .then(function() {
+        return loginPage.login(login, password);
+      })
+  });
+ 
+  this.Then(/^login should be successful$/, function() {
+    return browser.findElement(by.css('h2.shelf-title')).isDisplayed();
   });
 
-  this.When(/^user logs in using Username as 'USER' and Password 'PASSWORD'$/, function () {
-    return browser.findElement(by.css('.btn.site-header-actions-btn.mr-2'))
-                  .then(function(element){
-                    return element.click();
-                  })
-                  .then(function(){
-                    return browser.findElement(by.id('login_field'))
-                  })
-                    .then(function(element){
-                      return element.sendKeys('test.acc.helper@gmail.com');
-                    })
-                  .then(function(){
-                    return browser.findElement(by.id('password'))
-                  })
-                  .then(function(element){
-                      return element.sendKeys('12qwASzx');
-                    })
-                  .then(function(){
-                    return browser.findElement(by.css('.btn.btn-primary.btn-block')).then(function(element){
-                        return element.click();
-                    })
-                  })
-                  // })
+  this.Given(/^user navigates to "([^"]*)" page$/, function(arg) {
+    return homePageLogIn.clickPlusButton();
   });
 
-  this.Then(/^login should be successful$/, function (callback) {
+  this.When(/^user create new repository$/, function() {
 
-   callback(null, 'pending');
- });
+  });
 
-  // this.Given(/^I am on the GitHub web site$/, function () {
-  //   return browser.get('https://github.com/');
+  this.Then(/^repository will be create$/, function() {
 
-  // });
-
-  // this.When(/^I click on "([^"]*)"$/, function (arg) {
-  //   return browser.findElement(by.css('.btn.site-header-actions-btn.mr-2')).then(function(element){
-  //     return element.click();
-  //     })
-  //   });
-
-
-  // this.Then(/^I click on "([^"]*)"$/, function (arg1) {
-  //        // Write code here that turns the phrase above into concrete actions
-  //        callback(null, 'pending');
-  //      });
-
+  });
 };
+
+module.exports = steps;

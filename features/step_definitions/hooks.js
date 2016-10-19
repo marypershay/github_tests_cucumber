@@ -2,14 +2,13 @@ module.exports = function () {
 
 	this.setDefaultTimeout(60000);
 	
-	this.Before(function () {
+	this.BeforeStep(function () {
 
-		browser.driver.manage().window().maximize();
 		browser.ignoreSynchronization=true;
 
 	});
 
-	// this.After(function() {
+	// this.AfterStep(function() {
 	// 	return browser.quit();
 	// });
 };

@@ -1,18 +1,12 @@
-var platforms = {
-
-    mobile: '--window-size=500,800',
-    tabletP: '--window-size=768,1024',
-    tabletL: '--window-size=1024,768',
-    desktop: '--window-size=1280,800'
-
-};
-
 exports.config = {
 
     specs: ['features/*.feature'],
 
     capabilities: {
         browserName: 'chrome',
+        chromeOptions : {
+            args: ['start-maximized','--disable-extensions']
+        }
     },
 
     allScriptsTimeout: 100000,
@@ -25,7 +19,7 @@ exports.config = {
             'features/support/world.js',
             'features/step_definitions/*.js',
         ],
-        format: "summary"
+        format: "pretty"
     },
 
 };
