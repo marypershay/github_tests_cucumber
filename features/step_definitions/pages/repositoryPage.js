@@ -8,6 +8,11 @@ var RepositoryPage = function() {
     var createNewFileButton = element(by.css('.BtnGroup-form .btn.btn-sm.BtnGroup-item'));
     var newFileInput = element(by.css('.js-blob-filename'));
     var commitNewFileButton = element(by.css('#submit-file'));
+    var newFileField = element.all(by.css('tr td.content span')).get(0);
+    var branchButton = element(by.css('.branch-select-menu'));
+    var branchNameInput = element(by.css('#context-commitish-filter-field'));
+    var createBranchButton = element(by.css('.js-create-branch'));
+    var branchName = element(by.css('.branch-select-menu button span'));
 
     this.selectMenuTab = function(tabMenuItem) {
         this.tabMenuItem = tabMenuItem.toLowerCase();
@@ -54,6 +59,25 @@ var RepositoryPage = function() {
 
     }
 
+    this.createNewBranch = function(newBranchName){
+        browser.sleep(3000);
+        return branchButton.click()
+            .then(function(){
+                return branchNameInput.sendKeys(newBranchName);
+            })
+            .then(function(){
+                browser.sleep(3000);
+                return createBranchButton.click();
+            })
+    }
+
+    this.getBranchName = function(){
+        return branchName.getText();
+    }
+
+    this.getFileName = function(){
+        return newFileField.getText();
+    }
 };
 
 module.exports = RepositoryPage;

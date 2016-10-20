@@ -7,7 +7,6 @@ Scenario: Log in
 	When I logs in using Username as "test.acc.helper@gmail.com" and Password "12qwASzx"
 	Then login should be successful as "testacchelper"
 
-
 Scenario: Create repository
 	Given I navigates to "https://github.com/"
    	When I choose menu "New repository"
@@ -23,8 +22,16 @@ Scenario: Rename repository
 
 Scenario: Create file in repository
     Given I navigates to "https://github.com/"
-    When I choose repository with name "Test1" 
-    And I want to create new file with name "NewFile"
+    When I choose repository with name "Test1_rename" 
+    And I create new file with name "NewFile"
+    Then file with name "NewFile" created
+
+Scenario: Create new branch in repository
+    Given I navigates to "https://github.com/"
+    When I choose repository with name "Test1_rename" 
+    And I create new branch with name "newBranch"
+    Then new branch with name "newBranch" created
+
 
 Scenario: Delete repository
     Given I navigates to "https://github.com/"

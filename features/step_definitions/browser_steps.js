@@ -21,6 +21,7 @@ var steps = function() {
   this.Given(/^I navigates to "(.+)"$/, function(url) {
     return browser.get(url);
   });
+
   this.When(/^I logs in using Username as "([^"]*)" and Password "([^"]*)"$/, function(login, password) {
     return homePage.clickSignInButton()
       .then(function() {
@@ -80,8 +81,26 @@ var steps = function() {
 
   });
 
-  this.When(/^I want to create new file with name "([^"]*)"$/, function(newFileName) {
+  this.When(/^I create new file with name "([^"]*)"$/, function(newFileName) {
     return repositoryPage.createNewFile(newFileName);
+  });
+
+  this.Then(/^file with name "([^"]*)" created$/, function(newFileName) {
+    return repositoryPage.getFileName()
+      .then(function(element) {
+        assert.equal(element, newFileName);
+      })
+  });
+
+  this.When(/^I create new branch with name "([^"]*)"$/, function(newBranchName) {
+    return repositoryPage.createNewBranch(newBranchName);
+  });
+
+  this.Then(/^new branch with name "([^"]*)" created$/, function(newBranchName) {
+    return repositoryPage.getBranchName()
+      .then(function(element) {
+        assert.equal(element, newBranchName);
+      })
   });
 };
 

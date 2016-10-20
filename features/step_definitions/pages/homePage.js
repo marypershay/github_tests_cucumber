@@ -3,7 +3,7 @@ var HomePage = function() {
   	var alertMessage = browser.element(by.css('.flash-notice div'));
 
     this.selectRepositoryItem = function(repositoryName){
-    	var str = '#repo_listing a[href*="'+ repositoryName +'"]';
+    	var str = '#repo_listing a[href$="'+ repositoryName +'"]';
     	return element(by.css(str));
     }
     this.clickSignInButton = function(){
