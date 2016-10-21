@@ -15,6 +15,9 @@ var createRepositoryPage = new CreateRepositoryPage();
 var RepositoryPage = require('./pages/repositoryPage');
 var repositoryPage = new RepositoryPage();
 
+var ExplorePage = require('./pages/explorePage');
+var explorePage = new ExplorePage();
+
 
 var steps = function() {
 
@@ -45,26 +48,20 @@ var steps = function() {
     return createRepositoryPage.createNewRepository(repositoryName);
   });
 
-  this.Then(/^repository created$/, function() {
-
-  });
-
   this.When(/^I choose repository with name "([^"]*)"$/, function(repositoryName) {
     return homePage.chooseRepositoryItem(repositoryName);
   });
 
   this.When(/^I choose "([^"]*)" tab menu$/, function(tabMenuItem) {
-
     return repositoryPage.clickMenuTab(tabMenuItem);
   });
 
   this.When(/^I delete repository with name "([^"]*)"$/, function(repositoryName) {
-    browser.sleep(10000);
     return repositoryPage.deleteRepository(repositoryName);
 
   });
 
-  this.Then(/^repository with name "([^"]*)" deleted$/, function(repositoryName) {
+  this.Then(/^I don't see repository with name "([^"]*)"$/, function(repositoryName) {
     return homePage.getAlertMessage()
       .then(function(element) {
         var str = 'Your repository \"testacchelper/' + repositoryName + '" was successfully deleted.';
@@ -73,19 +70,21 @@ var steps = function() {
   });
 
   this.When(/^I rename repository to name "([^"]*)"$/, function(repositoryName) {
-    browser.sleep(10000);
     return repositoryPage.renameRepository(repositoryName);
   });
 
-  this.Then(/^repository renamed$/, function() {
-
+  this.Then(/^I see repository with name "([^"]*)"$/, function(repositoryName) {
+    return repositoryPage.getRepositoryName()
+      .then(function(element) {
+        assert(element, repositoryName);
+      });
   });
 
   this.When(/^I create new file with name "([^"]*)"$/, function(newFileName) {
     return repositoryPage.createNewFile(newFileName);
   });
 
-  this.Then(/^file with name "([^"]*)" created$/, function(newFileName) {
+  this.Then(/^I see file with name "([^"]*)"$/, function(newFileName) {
     return repositoryPage.getFileName()
       .then(function(element) {
         assert.equal(element, newFileName);
@@ -96,12 +95,25 @@ var steps = function() {
     return repositoryPage.createNewBranch(newBranchName);
   });
 
-  this.Then(/^new branch with name "([^"]*)" created$/, function(newBranchName) {
+  this.Then(/^I see new branch with name "([^"]*)"$/, function(newBranchName) {
     return repositoryPage.getBranchName()
       .then(function(element) {
         assert.equal(element, newBranchName);
       })
   });
+
+  this.When(/^I choose "([^"]*)"$/, function(exploreGit) {
+    return homePage.clickExploreButton();
+  });
+
+  this.When(/^I choose "([^"]*)" category$/, function(exploreCategory) {
+    return explorePage.chooseExploreCategory(exploreCategory);
+  });
+
+  this.When(/^I choose "([^"]*)" repository$/, function(repositoryName) {
+    return explorePage.chooseRepository(repositoryName);
+  });
+
 };
 
 module.exports = steps;

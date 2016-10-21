@@ -1,4 +1,5 @@
 var RepositoryPage = function() {
+    var EC = protractor.ExpectedConditions;
 
     var deleteButton = element.all(by.css('.btn.btn-danger.boxed-action')).get(2);
     var repositoryNameInput = element(by.css('#facebox p input'));
@@ -13,6 +14,7 @@ var RepositoryPage = function() {
     var branchNameInput = element(by.css('#context-commitish-filter-field'));
     var createBranchButton = element(by.css('.js-create-branch'));
     var branchName = element(by.css('.branch-select-menu button span'));
+    var repositoryName = element(by.css('strong > a'));
 
     this.selectMenuTab = function(tabMenuItem) {
         this.tabMenuItem = tabMenuItem.toLowerCase();
@@ -25,7 +27,7 @@ var RepositoryPage = function() {
     }
 
     this.deleteRepository = function(repositoryName) {
-        return browser.findElement(by.css('.site-footer-container')).isDisplayed()
+        return browser.wait(EC.elementToBeClickable(deleteButton), 5000)
             .then(function() {
                 return deleteButton.click()
             })
@@ -38,12 +40,16 @@ var RepositoryPage = function() {
     }
 
     this.renameRepository = function(repositoryName) {
-        return renameRepositoryInput.clear()
+        return browser.wait(EC.elementToBeClickable(renameRepositoryInput), 5000)
+            .then(function() {
+                return renameRepositoryInput.clear()
+            })
             .then(function() {
                 return renameRepositoryInput.sendKeys(repositoryName)
-                    .then(function() {
-                        return renameRepositoryButton.click();
-                    })
+            })
+            .then(function() {
+                return renameRepositoryButton.click();
+
             });
 
     }
@@ -59,24 +65,30 @@ var RepositoryPage = function() {
 
     }
 
-    this.createNewBranch = function(newBranchName){
-        browser.sleep(3000);
-        return branchButton.click()
-            .then(function(){
+    this.createNewBranch = function(newBranchName) {
+        return browser.wait(EC.elementToBeClickable(branchButton), 5000)
+            .then(function() {
+                return branchButton.click()
+            })
+            .then(function() {
                 return branchNameInput.sendKeys(newBranchName);
             })
-            .then(function(){
+            .then(function() {
                 browser.sleep(3000);
                 return createBranchButton.click();
             })
     }
 
-    this.getBranchName = function(){
+    this.getBranchName = function() {
         return branchName.getText();
     }
 
-    this.getFileName = function(){
+    this.getFileName = function() {
         return newFileField.getText();
+    }
+
+    this.getRepositoryName = function() {
+        return repositoryName.getText();
     }
 };
 

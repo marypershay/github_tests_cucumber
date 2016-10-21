@@ -11,26 +11,26 @@ Scenario: Create repository
 	Given I navigates to "https://github.com/"
    	When I choose menu "New repository"
 	When I create new repository with name "Test1"
-	Then repository created
+	Then I see repository with name "Test1"
 
 Scenario: Rename repository
     Given I navigates to "https://github.com/"
     When I choose repository with name "Test1"
     When I choose "Setting" tab menu
     And I rename repository to name "Test1_rename"
-    Then repository renamed 
+    Then I see repository with name "Test1_rename"
 
 Scenario: Create file in repository
     Given I navigates to "https://github.com/"
     When I choose repository with name "Test1_rename" 
     And I create new file with name "NewFile"
-    Then file with name "NewFile" created
+    Then I see file with name "NewFile"
 
 Scenario: Create new branch in repository
     Given I navigates to "https://github.com/"
     When I choose repository with name "Test1_rename" 
     And I create new branch with name "newBranch"
-    Then new branch with name "newBranch" created
+    Then I see new branch with name "newBranch"
 
 
 Scenario: Delete repository
@@ -38,5 +38,11 @@ Scenario: Delete repository
     When I choose repository with name "Test1_rename"
     When I choose "Setting" tab menu
 	And I delete repository with name "Test1_rename"
-	Then repository with name "Test1_rename" deleted
+	Then I don't see repository with name "Test1_rename"
 
+Scenario: Find "Font-Awesome" repository using Explore GitHub 
+    When I navigates to "https://github.com/"
+    And I choose "Explore GitHub"
+    When I choose "Icon fonts" category
+    And I choose "Font-Awesome" repository
+    Then I see repository with name "Font-Awesome"
