@@ -14,5 +14,13 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marypershay/github_tests_cucumber.git"
+  },
+  "bugs": {
+    "url": "https://github.com/marypershay/github_tests_cucumber/issues"
+  },
+  "homepage": "https://github.com/marypershay/github_tests_cucumber#readme"
 }
