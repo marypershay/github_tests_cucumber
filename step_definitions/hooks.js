@@ -2,13 +2,8 @@ module.exports = function () {
 
 	this.setDefaultTimeout(60000);
 	
-	this.BeforeStep(function () {
-
+	this.Before(function () {
 		browser.ignoreSynchronization=true;
-
 	});
 
-	// this.AfterStep(function() {
-	// 	return browser.quit();
-	// });
 };

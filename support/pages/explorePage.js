@@ -15,10 +15,6 @@ var ExplorePage = function() {
         return element(by.css(str));
     }
 
-    this.clickExploreButton = function() {
-        return exploreButton.click();
-    }
-
     this.chooseExploreCategory = function(exploreCategory) {
         return this.selectExploreCategory(exploreCategory).click();
     }
