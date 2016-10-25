@@ -14,7 +14,7 @@ function HomePage() {
     	return element(by.css(str));
     };
     this.clickSignInButton = function(){
-    	return signInButton.click();
+    	return this.signInButton.click();
     };
 
     this.chooseRepositoryItem = function(repositoryName){
@@ -22,11 +22,11 @@ function HomePage() {
     };
 
     this.getAlertMessage = function(){
-    	return alertMessage.getText();
+    	return this.alertMessage.getText();
     };
 
     this.clickExploreButton = function(){
-    	return exploreButton.click();
+    	return this.exploreButton.click();
     };
 };
 

@@ -6,20 +6,22 @@ Page.prototype.profileMenu = element(by.css('#user-links .header-nav-item:nth-ch
 Page.prototype.profileName = element(by.css('.dropdown-header.header-nav-current-user'));
 
 Page.prototype.clickPlusButton = function() {
-	return plusButton.click();
+	return this.plusButton.click();
 };
 
 Page.prototype.chooseNewRepositoryMenuItem = function() {
-	return plusButton.click()
+	var _this = this;
+	return this.plusButton.click()
 		.then(function() {
-			return newRepositoryMenuItem.click();
+			return _this.newRepositoryMenuItem.click();
 		});
 };
 
 Page.prototype.checkProfileOwner = function() {
-	return profileMenu.click()
+	var _this = this;
+	return this.profileMenu.click()
 		.then(function() {
-			return profileName.getText();
+			return _this.profileName.getText();
 		});
 };
 
