@@ -8,7 +8,9 @@
     "cucumber": "^1.3.1"
   },
   "devDependencies": {
-    "gulp": "^3.9.1"
+    "gulp": "^3.9.1",
+    "gulp-angular-protractor": "^0.2.0",
+    "gulp-cucumber": "0.0.22"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
