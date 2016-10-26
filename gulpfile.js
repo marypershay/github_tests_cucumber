@@ -1,31 +1,33 @@
 var gulp = require('gulp');
-// var webdriver_update = require('gulp-protractor').webdriver_update;
-// var protractor = require('gulp-protractor').protractor;
-
-var cucumber = require('gulp-cucumber');
-
-
-
-// gulp.task("webdriver_update", webdriver_update);
-
-// gulp.task("test", function() {
-// 	return gulp.src('features/*')
-// 		.pipe(protractor({
-// 			configFile: "conf.js"
-// 		}))
-// 		.on("error", function(e) {
-// 			throw e;
-// 		});
-// });
+var util = require('gulp-util');
 var angularProtractor = require('gulp-angular-protractor');
 
+gulp.task('default', ['dev', 'multi']);
 
-gulp.task("test", function() {
-	return gulp.src(['./src/tests/*.js'])
+util.env.view ? process.env.VIEW = util.env.view : process.env.VIEW = 'desktop';
+
+gulp.task("dev", function() {
+
+	return gulp.src(['features/*'])
 		.pipe(angularProtractor({
-			'configFile': 'conf.js',
+			'configFile': 'protractor.conf.js',
 			'autoStartStopServer': true,
-			'debug': false
+			'debug': false,
+			'args': ['--cucumberOpts.tags', '~@ignore'
+			]
+		}))
+		.on('error', function(e) {
+			throw e
+		});
+});
+
+gulp.task("multi", function() {
+
+	return gulp.src(['features/*'])
+		.pipe(angularProtractor({
+			'configFile': 'protractor.conf.mult.js',
+			'autoStartStopServer': true,
+			'debug': false,
 		}))
 		.on('error', function(e) {
 			throw e

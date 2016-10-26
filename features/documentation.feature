@@ -7,13 +7,13 @@ I can doing smth
 #    When I click on Sign In button
 #	And I logs in using Username as "test.acc.helper@gmail.com" and Password "12qwASzx"
 #	Then login should be successful as "testacchelper"
-
+@desktop
 Scenario: Create repository
 	Given I navigates to "https://github.com/"
     When I choose menu "New repository"
 	When I create new repository with name "Test1"
 	Then I see repository with name "Test1"
-
+@ignore
 Scenario: Rename repository
     Given I navigates to "https://github.com/"
     When I choose repository with name "Test1"
@@ -26,7 +26,7 @@ Scenario: Create file in repository
     When I choose repository with name "Test1_rename" 
     And I create new file with name "NewFile"
     Then I see file with name "NewFile"
-
+@ignore
 Scenario: Create new branch in repository
     Given I navigates to "https://github.com/"
     When I choose repository with name "Test1_rename" 
@@ -40,7 +40,7 @@ Scenario: Delete repository
     When I choose "Setting" tab menu
 	And I delete repository with name "Test1_rename"
 	Then I don't see repository with name "Test1_rename"
-
+@ignore
 Scenario: Find "Font-Awesome" repository using Explore GitHub 
     When I navigates to "https://github.com/"
     And I choose Explore GitHub

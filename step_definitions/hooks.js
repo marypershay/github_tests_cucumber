@@ -12,7 +12,14 @@ module.exports = function() {
 		browser.ignoreSynchronization = true;
 		if (isStart) {
 			isStart = false;
-			browser.get("https://github.com/");
+			if(process.env.VIEW == 'desktop'){
+				browser.driver.manage().window().maximize();
+			}
+			browser.get("https://github.com/").then(function() {
+				if (process.env.VIEW == 'mobile') {
+					browser.element(by.css('.site-header-toggle')).click();
+				}
+			})
 			return (new HomePage()).clickSignInButton()
 				.then(function() {
 					return (new LoginPage()).login("test.acc.helper@gmail.com", "12qwASzx");
@@ -20,7 +27,7 @@ module.exports = function() {
 		}
 	});
 
-	this.signOutMenuItem = element(by.css('logout-form'));
+	// this.signOutMenuItem = element(by.css('logout-form'));
 
 	// this.AfterStep(function() {
 	// 	var profileMenu = element(by.css('#user-links .header-nav-item:nth-child(3) a:first-child'));
