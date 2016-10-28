@@ -1,30 +1,13 @@
 exports.config = {
 
-    specs: ['features/*.feature'],
-
     multiCapabilities: [
-    // {
-    //     name: 'chrome_desktop',
-    //     browserName: 'chrome',
-    //     chromeOptions: {
-    //         args: ['start-maximized', '--disable-extensions']
-    //     }
-    // },
-    //  {
-    //     name: 'chrome_tablet',
-    //     browserName: 'chrome',
-    //     chromeOptions: {
-    //         args: ['--window-size=768,1024', '--disable-extensions']
-    //     }
-    // },
-     {
-        name: 'phantomjs',
-        browserName: 'phantomjs',
-        'phantomjs.binary.path': require('phantomjs').path
+    {
+        browserName: 'chrome',
+        specs: ['features/repository.feature']
     },
      {
-        name: 'firefox',
         browserName: 'firefox',
+        specs: ['features/general.feature']
     }
     ],
 

@@ -3,14 +3,13 @@ exports.config = {
     specs: ['features/*.feature'],
 
     capabilities: {
-            name: 'chrome_desktop',
             browserName: 'chrome',
             chromeOptions: {
              args: ['--window-size=768,1024','--disable-extensions']
         }
-    }
+    },
         
-    ,
+    // ,
 
     allScriptsTimeout: 100000,
     getPageTimeout: 30000,
